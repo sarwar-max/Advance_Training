@@ -1,0 +1,103 @@
+package com.dao;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.bean.Product;
+import com.resource.DbResource;
+
+public class ProductDao {
+
+			public int storeProduct(Product pdt) {
+				try {
+Connection con = DbResource.getDbConnection();
+PreparedStatement pstmt = con.prepareStatement("insert into product values(?,?,?)");
+				pstmt.setInt(1, pdt.getId());
+				pstmt.setString(2, pdt.getName());
+				pstmt.setFloat(3, pdt.getPrice());
+				int res= pstmt.executeUpdate();
+				return res;
+				} catch (Exception e) {
+					System.out.println(e);
+				}
+				return 0;
+			}
+			
+			public int deleteProduct(int id) {
+				try {
+				Connection con = DbResource.getDbConnection();
+PreparedStatement pstmt = con.prepareStatement("delete from product where id = ?");
+				pstmt.setInt(1, id);
+				int res= pstmt.executeUpdate();
+				return res;
+				} catch (Exception e) {
+					System.out.println(e);
+				}
+				return 0;
+			}
+			
+			public int updateProduct(Product pdt) {
+				try {
+					Connection con = DbResource.getDbConnection();
+PreparedStatement pstmt = con.prepareStatement("update product set price = ? where id = ?");
+				pstmt.setFloat(1, pdt.getPrice());
+				pstmt.setInt(2, pdt.getId());
+				int res= pstmt.executeUpdate();
+				return res;
+				} catch (Exception e) {
+					System.out.println(e);
+				}
+				return 0;
+			}
+			public List<Employee> findAllEmployee() {
+				
+				List<Employee> listOfEmp = new ArrayList<>();
+				
+				try {
+					Connection con = DbResource.getDbConnection();
+PreparedStatement pstmt = con.prepareStatement("select * from employee");
+				ResultSet rs = pstmt.executeQuery();
+				while(rs.next()) {
+					Employee emp = new Employee();				// converting each record into java bean object. 
+					emp.setId(rs.getInt("id"));
+					emp.setName(rs.getString("name"));
+					emp.setSalary(rs.getFloat("salary"));
+					listOfEmp.add(emp);
+				}
+				return listOfEmp;
+				
+				} catch (Exception e) {
+					System.out.println(e);
+				}
+				return null;
+			}
+			
+			  //different query
+		    public Employee getEmployeeByid(int id)
+		    {
+		        Employee emp = null;
+		        try
+		        {
+		        	Connection con = DbResource.getDbConnection();
+		            PreparedStatement ps = con.prepareStatement("SELECT * FROM employee WHERE id = ?");
+		            ps.setInt(1, id);
+		            ResultSet rs = ps.executeQuery();
+		            //iterate through result
+		            while(rs.next())
+		            {
+		                emp = new Employee(rs.getInt("employee_id"), rs.getString("employee_name"), rs.getFloat("Employee_salary"));
+		            }
+		        }
+		        catch(Exception e)
+		        {
+		            e.printStackTrace();
+		        }
+		        return emp;
+		    }
+}
+
+
