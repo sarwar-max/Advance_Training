@@ -4,4 +4,5 @@
     <fullyQualifiedTypeName name="com.service.ProductService"/>
     <fullyQualifiedTypeName name="com.dao.ProductDao"/>
     <fullyQualifiedTypeName name="com.bean.Product"/>
+    <fullyQualifiedTypeName name="org.hibernate.annotations.Entity"/>
 </qualifiedTypeNameHistroy>

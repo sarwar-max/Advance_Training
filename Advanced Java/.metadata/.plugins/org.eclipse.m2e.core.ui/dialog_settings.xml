@@ -82,4 +82,19 @@
 			<item value="0.0.1-SNAPSHOT"/>
 		</list>
 	</section>
+	<section name="wizardPage">
+		<list key="groupId">
+			<item value="OnlineBookStore_Problem_Statement_4_5_6"/>
+			<item value="OnlineBookStore"/>
+		</list>
+		<list key="name">
+		</list>
+		<list key="artifactId">
+			<item value="OnlineBookStore_Problem_Statement_4_5_6"/>
+			<item value="OnlineBookStore"/>
+		</list>
+		<list key="version">
+			<item value="0.0.1-SNAPSHOT"/>
+		</list>
+	</section>
 </section>
